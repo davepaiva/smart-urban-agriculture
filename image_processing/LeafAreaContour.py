@@ -51,12 +51,13 @@ cv2.destroyAllWindows()
 #Find the contours on the binary mask and store them in 'conts' list. Using the list, draw contours on orignal image
 conts, _ = cv2.findContours(maskOpen,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
 
+area = []
+
 for c in conts:
-     M = cv2.moments(c)
-     cX = int(M["m10"] / M["m00"])
-     cY = int(M["m01"] / M["m00"])
-     cv2.circle(img, (cX, cY), 7, (255, 255, 255), -1)
-     cv2.putText(img, "center", (cX - 20, cY - 20),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+     contArea = cv2.contourArea(c)
+     area.append(contArea)  # in PX uits
+     
+plantArea = max(area)*pixelPerUnitRatio  #in mm
 
 cv2.drawContours(img,conts,-1,(0,0,255),3)
 cv2.imshow('final image', img)
