@@ -56,13 +56,13 @@ area = []
 for c in conts:
      contArea = cv2.contourArea(c)
      area.append(contArea)  # in PX uits
-     
-plantArea = max(area)*pixelPerUnitRatio  #in mm
+
+
+## Enter pixel per unit ratio of image
+# pixelPerUnitRatio = '<ratio value>'
+# plantArea = max(area)*pixelPerUnitRatio  #in mm
 
 cv2.drawContours(img,conts,-1,(0,0,255),3)
 cv2.imshow('final image', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
-
-
